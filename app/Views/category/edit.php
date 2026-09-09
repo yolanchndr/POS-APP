@@ -1,0 +1,100 @@
+<?= $this->include('layouts/header') ?>
+
+<!-- Navbar -->
+<?= $this->include('layouts/navbar') ?>
+
+<!-- Main Sidebar Container -->
+<?= $this->include('layouts/sidebar') ?>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 fw-bold">Edit Kategori</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('category') ?>">Kategori</a></li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <!-- PAGE SUBTITLE -->
+            <div class="mb-4">
+                <p class="text-muted mb-0">
+                    Perbarui data kategori
+                </p>
+            </div>
+
+            <!-- FLASHMESSAGES / ERRORS -->
+            <?php if (session()->getFlashdata('error')) : ?>
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    <?= session()->getFlashdata('error') ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            <?php endif; ?>
+
+            <?php if (session()->getFlashdata('errors')) : ?>
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <ul class="mb-0 ps-3">
+                        <?php foreach (session()->getFlashdata('errors') as $error) : ?>
+                            <li><?= esc($error) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            <?php endif; ?>
+
+            <!-- FORM CARD -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <form action="<?= base_url('category/update/' . $category['category_id']) ?>" method="post">
+                        <?= csrf_field() ?>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">
+                                Nama Kategori <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" 
+                                   name="name" 
+                                   class="form-control" 
+                                   value="<?= old('name', $category['name']) ?>" 
+                                   maxlength="100" 
+                                   required>
+                        </div>
+
+                        <div class="d-flex flex-column flex-sm-row gap-2">
+                            <button type="submit" class="btn btn-dark">
+                                <i class="bi bi-save me-1"></i> Update
+                            </button>
+                            <a href="<?= base_url('category') ?>" class="btn btn-outline-secondary">
+                                Kembali
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- /.content -->
+
+</div>
+<!-- /.content-wrapper -->
+
+<?= $this->include('layouts/footer') ?>

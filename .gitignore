@@ -1,0 +1,7 @@
+/env
+.env
+/vendor/
+/writable/*
+!/writable/index.html
+.DS_Store
+.php-cs-fixer.cache
