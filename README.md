@@ -10,11 +10,6 @@
 
 <p align="center">
 
-
-
-
-\
-
 </p>
 
 ---
@@ -336,6 +331,41 @@ Sesuaikan `baseURL` dengan konfigurasi server lokal Anda.
 
 ---
 
+### 4. Pastikan Folder Cache Tersedia
+
+CodeIgniter 4 membutuhkan folder `writable/cache` untuk menyimpan file cache.
+
+Pastikan folder `cache` sudah tersedia sebelum menjalankan migration atau menggunakan aplikasi.
+
+Jika folder belum ada, buat dengan perintah:
+
+```bash
+mkdir -p writable/cache
+```
+
+Kemudian periksa permission dan keberadaan folder:
+
+```bash
+ls -ld writable writable/cache
+```
+
+Contoh hasil:
+
+```text
+drwxr-xr-x  writable
+drwxr-xr-x  writable/cache
+```
+
+Pastikan web server atau PHP memiliki permission untuk menulis ke folder `writable/`, khususnya:
+
+```text
+writable/cache/
+```
+
+> Pada environment Linux, permission folder `writable/` perlu disesuaikan dengan user yang menjalankan PHP atau web server.
+
+---
+
 ## Database Configuration
 
 Konfigurasi database dapat dilakukan melalui file `.env`.
@@ -368,7 +398,7 @@ dengan environment Anda.
 
 Project menyediakan struktur database melalui **CodeIgniter 4 Migration** dan **Seeder**.
 
-Untuk menjalankan migration:
+Setelah database dikonfigurasi dan folder `writable/cache` tersedia, jalankan migration:
 
 ```bash
 php spark migrate
@@ -404,7 +434,7 @@ http://localhost:8080
 
 ### Menggunakan Apache / Nginx
 
-Untuk production atau deployment menggunakan web server, **document root sebaiknya diarahkan ke folder ****`public/`**, bukan ke root repository.
+Untuk production atau deployment menggunakan web server, **document root sebaiknya diarahkan ke folder `public/`**, bukan ke root repository.
 
 Contoh:
 
